@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl4p4uxerti8p"]
+
+[ext_resource type="Script" path="res://scripts/clearZone.gd" id="1_dhefp"]
+[ext_resource type="AudioStream" uid="uid://cyub47crx4dyk" path="res://assets/sound/clear.mp3" id="2_bhb60"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whm4g"]
+size = Vector2(70, 20)
+
+[node name="ClearZone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_dhefp")
+
+[node name="ClearArea" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_whm4g")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bhb60")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

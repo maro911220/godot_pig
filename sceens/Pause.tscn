@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbsqx2tjgrh70"]
+
+[ext_resource type="Script" path="res://scripts/pause.gd" id="1_lt7qh"]
+[ext_resource type="Theme" uid="uid://r5dj54g87crk" path="res://assets/new_theme.tres" id="2_5w4h0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkcex"]
+bg_color = Color(0, 0, 0, 0.396078)
+anti_aliasing_size = 5.555
+
+[node name="Pause" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_lt7qh")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = -556.0
+offset_top = -304.0
+offset_right = 596.0
+offset_bottom = 344.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vkcex")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.5
+offset_top = -168.5
+offset_right = 128.5
+offset_bottom = 168.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Resume" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../Restart")
+focus_previous = NodePath("../Quit")
+theme = ExtResource("2_5w4h0")
+theme_override_font_sizes/font_size = 32
+action_mode = 0
+text = "재개"
+
+[node name="Restart" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Resume")
+theme = ExtResource("2_5w4h0")
+theme_override_font_sizes/font_size = 32
+text = "다시 시작"
+
+[node name="Quit" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Restart")
+theme = ExtResource("2_5w4h0")
+theme_override_font_sizes/font_size = 32
+text = "나가기"

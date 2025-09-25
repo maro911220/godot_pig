@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://28wtbj6ipuac"]
+
+[ext_resource type="Script" path="res://scripts/monster.gd" id="1_qr5tc"]
+[ext_resource type="Texture2D" uid="uid://cx0nj012veac" path="res://assets/Spritesheet/character_enemy_sandbug_walk.png" id="2_mw6sc"]
+[ext_resource type="PackedScene" uid="uid://dpfpkhcgvjwlp" path="res://sceens/killzone.tscn" id="3_8vi53"]
+[ext_resource type="AudioStream" uid="uid://b1r8cup64obwl" path="res://assets/sound/stomp.mp3" id="4_h4ws2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir7ed"]
+atlas = ExtResource("2_mw6sc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti0ce"]
+atlas = ExtResource("2_mw6sc")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twkye"]
+atlas = ExtResource("2_mw6sc")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f58d7"]
+atlas = ExtResource("2_mw6sc")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gt3fi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir7ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti0ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twkye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f58d7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p760w"]
+radius = 2.75
+height = 12.0149
+
+[node name="monster" type="Node2D"]
+script = ExtResource("1_qr5tc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_gt3fi")
+animation = &"idle"
+autoplay = "idle"
+flip_h = true
+
+[node name="Killzone" parent="." instance=ExtResource("3_8vi53")]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, -4.5)
+rotation = 1.58728
+shape = SubResource("CapsuleShape2D_p760w")
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+position = Vector2(0, -12)
+target_position = Vector2(0, -9)
+collision_mask = 2
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
+target_position = Vector2(11, 0)
+collision_mask = 4
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
+target_position = Vector2(-10, 0)
+collision_mask = 4
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -4.5)
+rotation = 1.58728
+stream = ExtResource("4_h4ws2")

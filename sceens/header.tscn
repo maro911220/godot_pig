@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddgs30ryl7fxv"]
+
+[ext_resource type="Script" path="res://scripts/header.gd" id="1_nc0bw"]
+[ext_resource type="Texture2D" uid="uid://bdelj8ecsx528" path="res://assets/Spritesheet/collectibles_life1.png" id="1_oe5kx"]
+[ext_resource type="FontFile" uid="uid://cdre225c5svki" path="res://assets/fonts/ArchivoBlack-Regular.ttf" id="1_yttwn"]
+[ext_resource type="Texture2D" uid="uid://c1lfyp6jjo6v7" path="res://assets/Spritesheet/coin.png" id="4_dk2ki"]
+
+[node name="header" type="Node2D"]
+z_index = 9
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_nc0bw")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 73.0
+offset_top = 19.0
+offset_right = 130.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_yttwn")
+theme_override_font_sizes/font_size = 32
+text = "X 5"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Label"]
+position = Vector2(-39, 15)
+scale = Vector2(2.125, 2.125)
+texture = ExtResource("1_oe5kx")
+
+[node name="Label_coin" type="Label" parent="CanvasLayer"]
+offset_left = 203.0
+offset_top = 19.0
+offset_right = 260.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_yttwn")
+theme_override_font_sizes/font_size = 32
+text = "X 5"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Label_coin"]
+position = Vector2(-39, 17)
+scale = Vector2(2.125, 2.125)
+texture = ExtResource("4_dk2ki")
+
+[connection signal="draw" from="CanvasLayer/Label" to="CanvasLayer/Label" method="_on_draw"]
+[connection signal="draw" from="CanvasLayer/Label_coin" to="CanvasLayer/Label_coin" method="_on_draw"]
